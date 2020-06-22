@@ -3,8 +3,9 @@ import random
 import numpy as np
 import pickle
 import pandas as pd
-import xgboost as xgb
+# import xgboost as xgb
 # import altair as alt
+from sklearn.ensemble import RandomForestRegressor
 import plotly.graph_objects as go
 st.write('<style>div.Widget.row-widget.stRadio > div{flex-direction:row;}</style>', unsafe_allow_html=True)
 st.image('../images/Logo.png')
@@ -80,7 +81,7 @@ if st.button('Submit'):
 	else:			
 		pickle_name = 'ML_overall_score.pkl'
 		loaded_model_overall = pickle.load(open(directory_name+pickle_name, 'rb'))
-		a = loaded_model_overall.best_estimator_.get_booster().feature_names
+		a = loaded_model_overall.best_estimator_.feature_names
 		# st.write(x)
 		# st.write(a)
 		dfx = pd.DataFrame(x,columns=a)
@@ -90,7 +91,7 @@ if st.button('Submit'):
 			pickle_name = 'ML_Category'+str(i)+'.pkl'
 			# st.write(directory_name+pickle_name)
 			loaded_model = pickle.load(open(directory_name+pickle_name, 'rb'))
-			dummy_aQs = loaded_model.best_estimator_.get_booster().feature_names
+			dummy_aQs = loaded_model.best_estimator_.feature_names
 			dfx = pd.DataFrame(x,columns=dummy_aQs)
 			result[i+1] = loaded_model.best_estimator_.predict(dfx)
 		dfr = pd.DataFrame(data=np.round(result*100,1),index=np.insert(qcategories,0,'Overall')).reset_index()
@@ -102,7 +103,7 @@ if st.button('Submit'):
 			print(i)
 			pickle_name = 'ML_Rand_'+str(i)+'.pkl'
 			loaded_model = pickle.load(open(directory_name+pickle_name, 'rb'))
-			dummy_aQs_5 = loaded_model.best_estimator_.get_booster().feature_names
+			dummy_aQs_5 = loaded_model.best_estimator_.feature_names
 			dfx = pd.DataFrame(x,columns=dummy_aQs)
 			resultm[i] = loaded_model.best_estimator_.predict(dfx.loc[:,dummy_aQs_5])
 		# resultm = 2*resultm
