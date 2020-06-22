@@ -1,0 +1,2 @@
+python36 -m pip install xgboost
+python36 -m pip install streamlit
