@@ -4,7 +4,7 @@ import numpy as np
 import pickle
 import pandas as pd
 import xgboost as xgb
-import altair as alt
+# import altair as alt
 import plotly.graph_objects as go
 st.write('<style>div.Widget.row-widget.stRadio > div{flex-direction:row;}</style>', unsafe_allow_html=True)
 st.image('../images/Logo.png')
